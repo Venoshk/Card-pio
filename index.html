@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!--CSS-->
+    <link rel="stylesheet" href="styles/output.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <title>Munchies</title>
+</head>
+<body>
+    <!--Header-->
+        <header class="bg-home w-full h-[420px] bg-cover bg-center flex flex-col justify-center items-center">
+            <img class="rounded-full shadow-sm w-48 h-48 mb-5 hover:scale-110 duration-200" src="assets/hamb-1.png" alt="">
+
+            <h2 class="text-white mb-4 text-2xl font-bold">Munchies</h2>
+
+            <p class="text-white mb-4">Samambaia-Sul, quadra 302, DF</p>
+
+            <span class="bg-green-700 text-white px-4 py-1 rounded " id="data">Seg á Dom - 18:00 as 22:00</span>
+        </header>
+    <!--Fim-Header-->
+
+    <!--Menu-->
+    <div id="menu">
+        <h1 class="mt-8 font-bold text-2xl mb-8 text-center">Conheça nosso menu</h1>
+        <main class="grid grid-cols-1 md:grid-cols-2 mb-16 px-2 gap-7 md:gap-10 mx-auto max-w-7xl">
+            <!--Produto-->
+            <div class="flex items-center gap-2 w-full ">
+                <img class="w-28 h-28 rounded hover:scale-110 hover:rotate-6 duration-200" src="assets/hamb-1.png" alt="Cheese Burger Duplo">
+
+                <div>
+                    <h3 class="font-bold mb-1">Cheese Burger Duplo</h3>
+                    <p class="text-xs mb-2">Pão levinho de fermentação natural da Trigou, burger 160g, queijo prato e maionese da casa</p>
+
+                    <div class="flex justify-between items-center">
+                        <span>R$20.90</span>
+
+                        <button class="bg-slate-950 px-4 rounded add-cart-item" data-name="Cheese Burger Duplo" data-price="20.90">
+                            <i class="fa-solid fa-cart-shopping text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 ">
+                <img class="w-28 h-28 rounded" src="assets/hamb-2.png" alt="X-Tudo">
+
+                <div>
+                    <h3 class="font-bold mb-1">X-Tudo</h3>
+                    <p class="text-xs mb-2">Pão levinho de fermentação natural da Trigou, burger 160g, queijo prato e maionese da casa</p>
+
+                    <div class="flex justify-between items-center">
+                        <span>R$12.90</span>
+
+                        <button class="bg-slate-950 px-4 rounded add-cart-item"  data-name="X-Tudo" data-price="12.90">
+                            <i class="fa-solid fa-cart-shopping text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 border-zinc-950 ">
+                <img class="w-28 h-28 rounded" src="assets/hamb-3.png" alt="Cheese Burger Duplo">
+
+                <div>
+                    <h3 class="font-bold mb-1">Paulista</h3>
+                    <p class="text-xs mb-2">Pão levinho de fermentação natural da Trigou, burger 160g, queijo prato e maionese da casa</p>
+
+                    <div class="flex justify-between items-center">
+                        <span>R$30.90</span>
+
+                        <button id="add-cart-item" class="bg-slate-950 px-4 rounded add-cart-item" data-name="Paulista" data-price="30.90">
+                            <i class="fa-solid fa-cart-shopping text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 ">
+                <img class="w-28 h-28 rounded hover:scale-200" src="assets/hamb-4.png" alt="X-Salada">
+
+                <div>
+                    <h3 class="font-bold mb-1">X-Salada</h3>
+                    <p class="text-xs mb-2">Pão levinho de fermentação natural da Trigou, burger 160g, queijo prato e maionese da casa</p>
+
+                    <div class="flex justify-between items-center">
+                        <span>R$26.90</span>
+
+                        <button id="add-cart-item" class="bg-slate-950 px-4 rounded add-cart-item" data-name="X-Salada" data-price="20.90">
+                            <i class="fa-solid fa-cart-shopping text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--Fim-Produto-->
+
+            <!--Lista-->
+                <div class="bg-stone-950/50 box w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden" id="cart">
+                    <div class="bg-white p-5 rounded-md md:w-[800px]">
+                        <h2 class="text-center text-lg">Meu carrinho</h2>
+                        <div id="cart-item"></div>
+                        <span class="font-bold flex gap-1 mb-4 mt-4" >Total á pagar:<p id="total-value"></p></span>
+
+                        <form class="form">
+                            <div class="flex flex-col gap-2 mb-4">
+                                <input type="text" id="alert-warn-name" class="p-2 border rounded outline-none  " placeholder="Nome">
+                                <span class="mb-4 text-red-600 alert-warn-span hidden">Preencha o compo</span>
+                                <input type="text" step="0.01" required class="p-2 border rounded outline-none " placeholder="CEP" maxlength="8" id="alert-warn-cep">
+                                <span class="mb-4 text-red-600 hidden alert-span-cep">CEP INVALIDO</span>
+                            </div>
+                        </form>
+                           
+
+                            <textarea name="endereço" id="endereço" placeholder="endereço" class="w-full p-2 rounded border outline-none focus:border-black"></textarea>
+
+                            <div class="flex gap-10 mb-4">
+                                <button class="px-3 py-3 bg-red-600 rounded font-bold" id="close-cart">Fechar</button>
+                                <button class="px-3 py-3 bg-green-500 rounded font-bold" id="env-btn" >Filanizar Compra</button>
+                            </div>
+
+                            <span class="text-red-600 font-bold hidden" id="alert-card">Seu carrinho está vazio!</span>
+                        
+                        
+                    </div>
+                </div>
+
+            <!--Fim-Lista-->
+        </main>
+
+        <!--Bebibas-->
+        <div class="mx-auto max-w-7xl my-2 px-2">
+            <h2 class=" font-bold text-3xl">Bebibas</h2>    
+        </div>
+       
+        <div class="grid grid-cols-1 md:grid-cols-2 mb-16 px-2 gap-7 md:gap-10 mx-auto max-w-7xl" id="menu">
+            <div class="flex items-center gap-2 w-full ">
+                <img class="w-28 h-28 rounded" src="assets/refri-1.png" alt="Coca-cola">
+
+                <div class="w-full">
+                    <h3 class="font-bold mb-1">Coca-cola</h3>
+                    <p class="text-xs mb-2">Lata</p>
+
+                    <div class="flex justify-between items-center">
+                        <span>R$6.90</span>
+
+                        <button id="add-cart-item" class="bg-slate-950 px-4 rounded add-cart-item"  data-name="Coca-cola" data-price="6.90">
+                            <i class="fa-solid fa-cart-shopping text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 w-full ">
+                <img class="w-28 h-28 rounded" src="assets/refri-2.png" alt="Guaraná">
+
+                <div class="w-full">
+                    <h3 class="font-bold mb-1">Guaraná</h3>
+                    <p class="text-xs mb-2">Lata</p>
+
+                    <div class="flex justify-between items-center">
+                        <span>R$6.90</span>
+
+                        <button id="add-cart-item" class="bg-slate-950 px-4 rounded add-cart-item" data-name="Guaraná" data-price="6.90">
+                            <i class="fa-solid fa-cart-shopping text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!--Fim-Bebibas-->
+    <!--Fim-Menu-->
+
+    <footer class="w-full bg-red-600 flex items-center justify-center px-3 py-3 fixed bottom-0 left-0">
+        <button class="text-white" id="open-cart">
+             (<span id="count" class="text-white ">0</span>)
+            Veja seu carrinho
+            <i class="fa-solid fa-cart-shopping"></i>
+        </button>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+</html>
