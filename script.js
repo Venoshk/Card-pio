@@ -1,24 +1,3 @@
-const checkRestOpen = () =>{
-    const date = new Date;
-    const hours = date.getHours();
-    return hours >= 18 && hours <= 22
-    
-}
-
-const dataOpen = document.querySelector("#data");
-
-const isOpen = checkRestOpen();
-
-if(isOpen){
-    dataOpen.classList.remove('bg-red-500');
-    dataOpen.classList.add('bg-green-600');
-}else{
-    dataOpen.classList.add('bg-red-500');
-    dataOpen.classList.remove('bg-green-600');
-}
-     
-
-
 const cartClose = document.querySelector("#cart")
 const cartOpen = document.querySelector("#open-cart");
 const CartItem = document.querySelector(".add-cart-item");
@@ -36,7 +15,31 @@ const btnEnv             = document.querySelector("#env-btn");
 const alertCart          = document.querySelector("#alert-card");
 const alertCep           = document.querySelector("#alert-warn-cep")
 const endereço           = document.querySelector("#endereço");
+const dataOpen           = document.querySelector("#data");
 const cart = []
+
+const checkRestOpen = () =>{
+    const date = new Date;
+    const hours = date.getHours();
+    return hours >= 18 && hours <= 22
+    
+}
+const isOpen = checkRestOpen();
+
+if(isOpen){
+    dataOpen.classList.remove('bg-red-500');
+    dataOpen.classList.add('bg-green-700');
+}else{
+    dataOpen.classList.add('bg-red-500');
+    dataOpen.classList.remove('bg-green-700');
+}
+
+//Abrir Carrinho
+cartOpen.addEventListener("click", () =>{
+    upDateCart()
+    cartClose.style.display = 'flex'
+});
+     
 //Fechar carrinho
 cartClose.addEventListener("click", (e) =>{
     if(e.target === cartClose){
@@ -48,11 +51,8 @@ closeCart.addEventListener('click', () => {
     cartClose.style.display = 'none'
 })
 
-//Abrir Carrinho
-cartOpen.addEventListener("click", () =>{
-    upDateCart()
-    cartClose.style.display = 'flex'
-});
+
+//Eventos
 
 menu.addEventListener('click', (e) =>{
     let parentButton = e.target.closest(".add-cart-item");
@@ -61,112 +61,7 @@ menu.addEventListener('click', (e) =>{
 
     cartAdd(name, price)
 
-})
-
-//funções 
-
-const cartAdd = (name, price) =>{
-    const existingItem = cart.find(item => item.name === name);
-
-    if(existingItem){
-        existingItem.quantify += 1;
-    }else{
-        cart.push({
-            name,
-            price,
-            quantify: 1
-        })
-        Toastify({
-            text: "Adicionado no carrinho",
-            duration: 3000,
-            close: true,
-            gravity: "bottom", // `top` or `bottom`
-            position: "center", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
-            style: {
-              background: "#2da52d",
-            },
-           }).showToast();
-    }
-
-    upDateCart()
-}
-
-const upDateCart = () =>{
-    list.innerHTML = "";
-    let total = 0
-    totalPrice.innerHTML = total
-    cart.forEach(item => {
-       const cartItemCreate = document.createElement('div');
-       const totalPrice = item.price * item.quantify;
-       total += totalPrice; 
-       
-       cartItemCreate.innerHTML = `
-           <div class="border-b-2">
-                <div class="flex gap-8 justify-between items-center">
-                    <div class="flex flex-col gap-2">
-                        <h2 class="font-bold">${item.name}</h2>
-                        <span>Qtd: ${item.quantify}</span>
-                        <span class="font-bold">R$${totalPrice.toFixed(2)}</span>
-                    </div>
-
-                    <div>
-                        <button class="px-2 py-2 bg-slate-300 rounded remove-btn" data-name="${item.name}">Remover</button>
-                    </div>
-                </div>
-           </div>
-       `
-       list.appendChild(cartItemCreate);
-    })
-
-    totalPrice.textContent = total.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-    })
-
-    items.textContent = cart.length
-}
-
-
-
-//Remoção de item da lista
-
-list.addEventListener("click", (e) => {
-    if(e.target.classList.contains("remove-btn")){
-        const name = e.target.getAttribute("data-name");
-
-        removeItemCart(name)
-    }
-})
-
-const removeItemCart = (name) => {
-    const index = cart.findIndex(item => item.name === name);
-
-    if(index !== -1){
-        const item = cart[index];
-
-        if(item.quantify > 1){
-            item.quantify -= 1
-            upDateCart();
-            return;
-        }
-
-        Toastify({
-            text: "Removido com sucesso!",
-            duration: 3000,
-            close: true,
-            gravity: "top", // `top` or `bottom`
-            position: "left", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
-            style: {
-              background: "#2da52d",
-            },
-           }).showToast();
-
-        cart.splice(index, 1);
-        upDateCart();
-    }
-}
+});
 
 //Buscar CEP
 inputCep.addEventListener("input", () => {
@@ -254,7 +149,110 @@ btnEnv.addEventListener('click', () =>{
     upDateCart();
 })
 
-console.log(inputCep)
+//funções 
+
+const cartAdd = (name, price) =>{
+    const existingItem = cart.find(item => item.name === name);
+
+    if(existingItem){
+        existingItem.quantify += 1;
+    }else{
+        cart.push({
+            name,
+            price,
+            quantify: 1
+        })
+        Toastify({
+            text: "Adicionado no carrinho",
+            duration: 3000,
+            close: false,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "#2da52d",
+            },
+           }).showToast();
+    }
+
+    upDateCart()
+}
+
+const upDateCart = () =>{
+    list.innerHTML = "";
+    let total = 0
+    totalPrice.innerHTML = total
+    cart.forEach(item => {
+       const cartItemCreate = document.createElement('div');
+       const totalPrice = item.price * item.quantify;
+       total += totalPrice; 
+       
+       cartItemCreate.innerHTML = `
+           <div class="border-b-2">
+                <div class="flex gap-8 justify-between items-center">
+                    <div class="flex flex-col gap-2">
+                        <h2 class="font-bold">${item.name}</h2>
+                        <span>Qtd: ${item.quantify}</span>
+                        <span class="font-bold">R$${totalPrice.toFixed(2)}</span>
+                    </div>
+
+                    <div>
+                        <button class="px-2 py-2 bg-slate-300 rounded remove-btn" data-name="${item.name}">Remover</button>
+                    </div>
+                </div>
+           </div>
+       `
+       list.appendChild(cartItemCreate);
+    })
+
+    totalPrice.textContent = total.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    })
+
+    items.textContent = cart.length
+}
+
+
+
+//Remoção de item da lista
+
+list.addEventListener("click", (e) => {
+    if(e.target.classList.contains("remove-btn")){
+        const name = e.target.getAttribute("data-name");
+
+        removeItemCart(name)
+    }
+})
+
+const removeItemCart = (name) => {
+    const index = cart.findIndex(item => item.name === name);
+
+    if(index !== -1){
+        const item = cart[index];
+
+        if(item.quantify > 1){
+            item.quantify -= 1
+            upDateCart();
+            return;
+        }
+
+        Toastify({
+            text: "Removido com sucesso!",
+            duration: 3000,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "left", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "#2da52d",
+            },
+           }).showToast();
+
+        cart.splice(index, 1);
+        upDateCart();
+    }
+};
 
 
 
