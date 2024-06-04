@@ -6,3 +6,16 @@
 *{
     font-family: "Poppins", sans-serif;
 }
+
+.input-number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+
+::-webkit-scrollbar {
+    width: 0px;  
+  }
+  
+::-webkit-scrollbar-track {
+    background: #fff;     
+  }
