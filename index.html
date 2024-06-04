@@ -8,7 +8,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="styles/output.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
+    <link rel="stylesheet" href="styles/style.css">
     
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -106,29 +106,38 @@
 
             <!--Lista-->
                 <div class="bg-stone-950/50 box w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden" id="cart">
-                    <div class="bg-white p-5 rounded-md md:w-[800px]">
+                    <div class="bg-white p-5 rounded-md w-full h-full overflow-auto md:w-[800px] md:h-[500px]">
                         <h2 class="text-center text-lg">Meu carrinho</h2>
                         <div id="cart-item"></div>
                         <span class="font-bold flex gap-1 mb-4 mt-4" >Total á pagar:<p id="total-value"></p></span>
 
-                        <form class="form">
-                            <div class="flex flex-col gap-2 mb-4">
-                                <input type="text" id="alert-warn-name" class="p-2 border rounded outline-none  " placeholder="Nome">
-                                <span class="mb-4 text-red-600 alert-warn-span hidden">Preencha o compo</span>
-                                <input type="text" step="0.01" required class="p-2 border rounded outline-none " placeholder="CEP" maxlength="8" id="alert-warn-cep">
-                                <span class="mb-4 text-red-600 hidden alert-span-cep">CEP INVALIDO</span>
+                        <form class="form" id="contact-form">
+                            <div class="flex flex-col gap-2 mb-4 md:flex-row">
+                                <input type="hidden" name="code" id="code">
+                                <input type="text" id="name" name="name" class="w-full p-2 border rounded outline-none focus:border-green-500 " placeholder="Nome">
+                                <input type="text" id="email" name="email" class="w-full p-2 border rounded outline-none focus:border-green-500 " placeholder="Email">
+                                <span class="mb-4 text-red-600 hidden" id="alert-name-span">Preencha o compo</span>
+                                <input type="number" id="home" name="home" class="p-2 border rounded outline-none input-number focus:border-green-500" placeholder="Casa">
+                                <span class="mb-4 text-red-600 hidden" id="alert-home-span">Preencha o compo</span>
                             </div>
-                        </form>
+
+                            <div class="flex flex-col gap-4 mb-4 md:flex-row">
+                                <input type="number" step="0.01" name="cep" required class="input-number p-2 border rounded outline-none focus:border-green-500" placeholder="CEP" maxlength="8" id="cep">
+                                <span class="mb-4 text-red-600 hidden" id="alert-cep-span">CEP INVALIDO</span>
+                                <input type="text" name="address" id="address" name="address"  placeholder="endereço" class="w-full p-2 rounded border outline-none focus:border-green-500">
+                                <span class="mb-4 text-red-600 hidden " id="alert-address-span">Endereço invalido</span>
+                                <input type="tel" placeholder="Telefone" class="w-full p-2 rounded border outline-none focus:border-green-500 input-number" id="phone-number">
+                            </div>
+                            
+                            <textarea name="message" id="message" name="message"  placeholder="Mensagem" class="w-full p-2 rounded border outline-none focus:border-green-500"></textarea>
+
                            
-
-                            <textarea name="endereço" id="endereço" placeholder="endereço" class="w-full p-2 rounded border outline-none focus:border-black"></textarea>
-
-                            <div class="flex gap-10 mb-4">
-                                <button class="px-3 py-3 bg-red-600 rounded font-bold" id="close-cart">Fechar</button>
-                                <button class="px-3 py-3 bg-green-500 rounded font-bold" id="env-btn" >Filanizar Compra</button>
-                            </div>
-
-                            <span class="text-red-600 font-bold hidden" id="alert-card">Seu carrinho está vazio!</span>
+                        </form>
+                        <div class="flex gap-10 mb-4 justify-between btns">
+                            <button class="px-3 py-3 bg-red-600 rounded font-bold" id="close-cart" type="button">Fechar</button>
+                            <button class="px-3 py-3 bg-green-500 rounded font-bold" id="env-btn" type="submit">Filanizar Compra</button>
+                        </div>
+                        <span class="text-red-600 font-bold hidden" id="alert-card">Seu carrinho está vazio!</span>
                         
                         
                     </div>
@@ -188,8 +197,9 @@
         </button>
     </footer>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="script.js"></script>
-   
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    
+    
 </body>
 </html>
