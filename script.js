@@ -30,7 +30,7 @@ let cart = [];
 
 const checkRestOpen = () => {
     const date = new Date;
-    const hours = 20//date.getHours();
+    const hours = date.getHours();
     return hours >= 18 && hours <= 22
 }
 const isOpen = checkRestOpen();

@@ -872,6 +872,10 @@ video {
   display: list-item;
 }
 
+.\!hidden {
+  display: none !important;
+}
+
 .hidden {
   display: none;
 }
@@ -1452,6 +1456,10 @@ video {
 
 .gap-2 {
   gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .gap-7 {
@@ -2675,6 +2683,18 @@ video {
   font-family: "Poppins", sans-serif;
 }
 
+.input-number::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -2741,6 +2761,11 @@ video {
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
+.focus\:border-green-500:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 197 94 / var(--tw-border-opacity));
+}
+
 .focus\:hover\:text-center:hover:focus {
   text-align: center;
 }
@@ -2756,12 +2781,20 @@ video {
 }
 
 @media (min-width: 768px) {
+  .md\:h-\[500px\] {
+    height: 500px;
+  }
+
   .md\:w-\[800px\] {
     width: 800px;
   }
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
   }
 
   .md\:gap-10 {
